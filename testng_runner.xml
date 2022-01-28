@@ -3,7 +3,15 @@
     <test name="VyTrack Homework Tests">
 
         <classes>
-            <class name="com.vytrack.tests.VyTrackTests"></class>
+            <class name="com.vytrack.tests.VyTrackTests">
+                <methods>
+
+                    <include name="pageNumberTest">
+
+                    </include>
+                </methods>
+
+            </class>
         </classes>
 
 

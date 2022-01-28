@@ -41,7 +41,7 @@ public class VyTrackTests extends TestBase {
 
     @Test
     public void pageNumberTest(){
-        extentLogger=report.createTest("VyTrack Homework Tests- Subtitle Verification");
+        extentLogger=report.createTest("VyTrack Homework Tests- PageNumber Verification");
 
 
         logInPage=new LogInPage();
@@ -57,9 +57,19 @@ public class VyTrackTests extends TestBase {
         extentLogger.info("Navigate to Calendar Events page under Activities tab");
 
 
-        String value = calendarEventsPage.pageNumber.getAttribute("value");
-        System.out.println("value = " + value);
-        
+        String actualValue = calendarEventsPage.pageNumber.getAttribute("value");
+        String expectedValue="1";
+
+        Assert.assertEquals(actualValue,expectedValue,"Verify that the page number on Calendar Events page is 1 as default");
+        extentLogger.info("Verify that the default page number at the page is 1");
+
+        extentLogger.pass("pageNumberTest is passed");
+
+
+    }
+
+    @Test
+    public void viewPerPageNumberTest(){
 
 
     }

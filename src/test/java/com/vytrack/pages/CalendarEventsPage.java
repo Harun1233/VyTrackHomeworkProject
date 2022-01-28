@@ -23,4 +23,8 @@ public class CalendarEventsPage extends BasePage {
     @FindBy(css = ".icons-holder>li>input")
     public WebElement pageNumber;
 
+    @FindBy(xpath = "//button[@class='btn dropdown-toggle ']")
+    public WebElement viewPerPage;
+
+
 }
