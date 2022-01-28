@@ -2,7 +2,9 @@ package com.vytrack.tests;
 
 import com.vytrack.pages.CalendarEventsPage;
 import com.vytrack.pages.LogInPage;
+import com.vytrack.utilites.ConfigurationReader;
 import com.vytrack.utilites.ExcelUtil;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -11,23 +13,32 @@ public class VyTrackTests extends TestBase {
 
 
     @Test
-    public void test1(){
+    public void subtitleTest(){
         extentLogger=report.createTest("VyTrack Homework Tests");
+
 
         LogInPage logInPage=new LogInPage();
 
         logInPage.loginAsStoreManager();
+        extentLogger.info("Log in to app as a store manager ");
+        extentLogger.info("Test datas: username: "+ ConfigurationReader.get("storemanager_username")+" password: "+ ConfigurationReader.get("storemanager_password"));
 
         CalendarEventsPage calendarEventsPage=new CalendarEventsPage();
 
+
         calendarEventsPage.navigateToModule("Activities","Calendar Events");
+        extentLogger.info("Navigate to Calendar Events page under Activities tab");
 
+        extentLogger.info("Verify that the 'Options' has displayed at page subtitle");
+        Assert.assertTrue(calendarEventsPage.optionsButton.isDisplayed(),"Verify that 'Options' button has been displayed on page subtitle");
 
-
+        extentLogger.pass("subtitleTest has been passed");
 
 
 
     }
+
+
 
 
 }

@@ -17,4 +17,7 @@ public class CalendarEventsPage extends BasePage {
     @FindBy(css = "[title='Create Calendar event']")
     public WebElement createCalendarEvent;
 
+    @FindBy(xpath = "//div[@class='btn-group actions-group']")
+    public WebElement optionsButton;
+
 }
