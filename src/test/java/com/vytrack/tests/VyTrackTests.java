@@ -1,5 +1,6 @@
 package com.vytrack.tests;
 
+import com.vytrack.pages.CalendarEventsPage;
 import com.vytrack.pages.LogInPage;
 import com.vytrack.utilites.ExcelUtil;
 import org.testng.annotations.DataProvider;
@@ -16,6 +17,10 @@ public class VyTrackTests extends TestBase {
         LogInPage logInPage=new LogInPage();
 
         logInPage.loginAsStoreManager();
+
+        CalendarEventsPage calendarEventsPage=new CalendarEventsPage();
+
+        calendarEventsPage.navigateToModule("Activities","Calendar Events");
 
 
 
