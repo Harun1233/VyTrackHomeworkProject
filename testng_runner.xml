@@ -6,7 +6,7 @@
             <class name="com.vytrack.tests.VyTrackTests">
                 <methods>
 
-                    <include name="pageNumberTest">
+                    <include name="viewPerPageNumberTest">
 
                     </include>
                 </methods>

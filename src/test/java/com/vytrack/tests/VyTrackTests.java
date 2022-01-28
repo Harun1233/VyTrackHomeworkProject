@@ -13,16 +13,15 @@ public class VyTrackTests extends TestBase {
     LogInPage logInPage;
     CalendarEventsPage calendarEventsPage;
 
-    @Test
-    public void subtitleTest(){
+    @Test(dataProvider = "storeManagerData")
+    public void subtitleTest(String username, String password){
         extentLogger=report.createTest("VyTrack Homework Tests- Subtitle Verification");
 
 
        logInPage=new LogInPage();
-
-        logInPage.loginAsStoreManager();
-        extentLogger.info("Log in to app as a store manager ");
-        extentLogger.info("Test datas: username: "+ ConfigurationReader.get("storemanager_username")+" password: "+ ConfigurationReader.get("storemanager_password"));
+       logInPage.login(username,password);
+       extentLogger.info("Log in to app as a store manager ");
+       extentLogger.info("Test datas: username: "+ username+" password: "+ password);
 
          calendarEventsPage=new CalendarEventsPage();
 
@@ -39,16 +38,15 @@ public class VyTrackTests extends TestBase {
 
     }
 
-    @Test
-    public void pageNumberTest(){
+    @Test(dataProvider = "storeManagerData")
+    public void pageNumberTest(String username, String password){
         extentLogger=report.createTest("VyTrack Homework Tests- PageNumber Verification");
 
 
         logInPage=new LogInPage();
-
-        logInPage.loginAsStoreManager();
+        logInPage.login(username,password);
         extentLogger.info("Log in to app as a store manager ");
-        extentLogger.info("Test datas: username: "+ ConfigurationReader.get("storemanager_username")+" password: "+ ConfigurationReader.get("storemanager_password"));
+        extentLogger.info("Test datas: username: "+ username+" password: "+ password);
 
         calendarEventsPage=new CalendarEventsPage();
 
@@ -68,11 +66,32 @@ public class VyTrackTests extends TestBase {
 
     }
 
-    @Test
-    public void viewPerPageNumberTest(){
+         @Test(dataProvider = "storeManagerData")
+        public void viewPerPageNumberTest(String username, String password){
+        extentLogger=report.createTest("VyTrack Homework Tests- PerPageNumber Verification");
 
 
-    }
+        logInPage=new LogInPage();
+        logInPage.login(username,password);
+        extentLogger.info("Log in to app as a store manager ");
+        extentLogger.info("Test datas: username: "+ username+" password: "+ password);
+
+        calendarEventsPage=new CalendarEventsPage();
+
+
+        calendarEventsPage.navigateToModule("Activities","Calendar Events");
+        extentLogger.info("Navigate to Calendar Events page under Activities tab");
+
+        calendarEventsPage.waitUntilLoaderScreenDisappear();
+             String actualText = calendarEventsPage.viewPerPage.getText();
+             String expectedText="25";
+
+             Assert.assertEquals(actualText,expectedText,"Verify that View Per Page is as expected");
+             extentLogger.info("Verify that the View Per Page is '25' as expected");
+
+             extentLogger.pass("viewPerPageNumberTest is passed");
+
+         }
 
 
 

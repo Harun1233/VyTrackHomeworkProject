@@ -32,15 +32,7 @@ public class LogInPage {
     @FindBy(id = "_submit")
     public WebElement loginBtn;
 
-    @DataProvider
-    public Object[][] storeManagerData(){
-        String worksheet=ConfigurationReader.get("excelWorkSheet");
-        ExcelUtil strMngr=new ExcelUtil("src/test/resources/Vytracktestdata.xlsx",worksheet);
 
-        String[][] dataArray = strMngr.getDataArray();
-
-        return dataArray;
-    }
 
 
     public void login(String username,String password){

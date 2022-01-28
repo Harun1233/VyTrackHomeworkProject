@@ -6,14 +6,12 @@ import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.vytrack.utilites.BrowserUtils;
 import com.vytrack.utilites.ConfigurationReader;
 import com.vytrack.utilites.Driver;
+import com.vytrack.utilites.ExcelUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -55,6 +53,16 @@ public class TestBase {
 
 
     }
+    @DataProvider
+    public Object[][] storeManagerData(){
+        String worksheet=ConfigurationReader.get("excelWorkSheet");
+        ExcelUtil strMngr=new ExcelUtil("src/test/resources/Vytracktestdata.xlsx",worksheet);
+
+        String[][] dataArray = strMngr.getDataArray();
+
+        return dataArray;
+    }
+
 
     @AfterTest
     public void tearsDownTest(){
