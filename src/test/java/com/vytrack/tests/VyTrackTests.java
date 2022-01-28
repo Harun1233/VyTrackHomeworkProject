@@ -28,8 +28,7 @@ public class VyTrackTests extends TestBase {
          calendarEventsPage=new CalendarEventsPage();
 
 
-        calendarEventsPage.navigateToModule("Activities","Calendar Events");
-        extentLogger.info("Navigate to Calendar Events page under Activities tab");
+        calendarEventsPage.navigateToModule(ConfigurationReader.get("tabName"),ConfigurationReader.get("moduleName"));        extentLogger.info("Navigate to Calendar Events page under Activities tab");
 
         extentLogger.info("Verify that the 'Options' has displayed at page subtitle");
         Assert.assertTrue(calendarEventsPage.optionsButton.isDisplayed(),"Verify that 'Options' button has been displayed on page subtitle");
@@ -53,7 +52,7 @@ public class VyTrackTests extends TestBase {
         calendarEventsPage=new CalendarEventsPage();
 
 
-        calendarEventsPage.navigateToModule("Activities","Calendar Events");
+        calendarEventsPage.navigateToModule(ConfigurationReader.get("tabName"),ConfigurationReader.get("moduleName"));
         extentLogger.info("Navigate to Calendar Events page under Activities tab");
 
 
@@ -79,8 +78,7 @@ public class VyTrackTests extends TestBase {
         calendarEventsPage=new CalendarEventsPage();
 
 
-        calendarEventsPage.navigateToModule("Activities","Calendar Events");
-        extentLogger.info("Navigate to Calendar Events page under Activities tab");
+        calendarEventsPage.navigateToModule(ConfigurationReader.get("tabName"),ConfigurationReader.get("moduleName"));        extentLogger.info("Navigate to Calendar Events page under Activities tab");
 
         calendarEventsPage.waitUntilLoaderScreenDisappear();
              String actualText = calendarEventsPage.viewPerPage.getText();
@@ -105,8 +103,7 @@ public class VyTrackTests extends TestBase {
         calendarEventsPage = new CalendarEventsPage();
 
 
-        calendarEventsPage.navigateToModule("Activities", "Calendar Events");
-        extentLogger.info("Navigate to Calendar Events page under Activities tab");
+        calendarEventsPage.navigateToModule(ConfigurationReader.get("tabName"),ConfigurationReader.get("moduleName"));        extentLogger.info("Navigate to Calendar Events page under Activities tab");
 
         calendarEventsPage.waitUntilLoaderScreenDisappear();
 
