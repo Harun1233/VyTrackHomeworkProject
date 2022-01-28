@@ -35,33 +35,59 @@ public class CalendarEventsPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa-chevron-right hide-text']")
     public WebElement rightClickRowForNextTable;
 
-   public int getTotalRowNumber(){
+    @FindBy(xpath = "//th[@class='select-all-header-cell renderable grid-cell grid-header-cell grid-header-cell-massAction']//div//button[@class='btn btn-default btn-small dropdown-toggle']")
+    public WebElement titleCheckBox;
 
-       List<WebElement> pageRowsFirst = Driver.get().findElements(By.cssSelector(".grid-row"));
-       int firstPageRowNumber = pageRowsFirst.size();
-       rightClickRowForNextTable.click();
-       List<WebElement> pageRowsSecond = Driver.get().findElements(By.cssSelector(".grid-row"));
+    public int getTotalRowNumber() {
 
-       int secondPageRowNumber = pageRowsSecond.size();
+        List<WebElement> pageRowsFirst = Driver.get().findElements(By.cssSelector(".grid-row"));
+        int firstPageRowNumber = pageRowsFirst.size();
+        rightClickRowForNextTable.click();
+        List<WebElement> pageRowsSecond = Driver.get().findElements(By.cssSelector(".grid-row"));
 
-
-
-       return firstPageRowNumber+secondPageRowNumber;
-   }
-
-   public int  getRecordsNumber(){
-
-       String rawTextOfRecordsNumber = recordsNumber.getText();
-
-       String[] ofs = rawTextOfRecordsNumber.split("Of");
-
-       String substring = ofs[1].trim().substring(0, 2);
+        int secondPageRowNumber = pageRowsSecond.size();
 
 
+        return firstPageRowNumber + secondPageRowNumber;
+    }
 
-       return Integer.parseInt(substring);
+    public int getRecordsNumber() {
 
-   }
+        String rawTextOfRecordsNumber = recordsNumber.getText();
+
+        String[] ofs = rawTextOfRecordsNumber.split("Of");
+
+        String substring = ofs[1].trim().substring(0, 2);
 
 
+        return Integer.parseInt(substring);
+
+    }
+
+    public boolean titleCheckBox() {
+        int dummy=0;
+        boolean flag = false;
+        titleCheckBox.click();
+
+        List<WebElement> elements = Driver.get().findElements(By.xpath("//td[@class='select-row-cell renderable grid-cell grid-body-cell grid-body-cell-massAction']"));
+        for (WebElement element : elements) {
+            if (element.isSelected()) {
+                dummy+=1;
+            }
+        }
+
+        if(dummy==elements.size()){
+            flag=true;
+        }
+
+        return flag;
+    }
 }
+
+
+
+
+
+
+
+
