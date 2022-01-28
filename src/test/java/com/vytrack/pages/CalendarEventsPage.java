@@ -35,7 +35,7 @@ public class CalendarEventsPage extends BasePage {
     @FindBy(xpath = "//i[@class='fa-chevron-right hide-text']")
     public WebElement rightClickRowForNextTable;
 
-    @FindBy(xpath = "//th[@class='select-all-header-cell renderable grid-cell grid-header-cell grid-header-cell-massAction']//div//button[@class='btn btn-default btn-small dropdown-toggle']")
+    @FindBy(xpath = "//button[@class='btn btn-default btn-small dropdown-toggle']//input[@type='checkbox']")
     public WebElement titleCheckBox;
 
     public int getTotalRowNumber() {
@@ -64,23 +64,29 @@ public class CalendarEventsPage extends BasePage {
 
     }
 
-    public boolean titleCheckBox() {
+    public boolean titleCheckBoxVerification() {
         int dummy=0;
-        boolean flag = false;
-        titleCheckBox.click();
 
-        List<WebElement> elements = Driver.get().findElements(By.xpath("//td[@class='select-row-cell renderable grid-cell grid-body-cell grid-body-cell-massAction']"));
-        for (WebElement element : elements) {
-            if (element.isSelected()) {
-                dummy+=1;
-            }
+        titleCheckBox.click();
+        waitUntilLoaderScreenDisappear();
+
+        List<WebElement> elements = Driver.get().findElements(By.xpath("//input[@tabindex='-1']"));
+        for (int i = 0; i < elements.size(); i++) {
+             if (elements.get(i).isSelected()){
+                 dummy+=1;
+             }
+
         }
+
 
         if(dummy==elements.size()){
-            flag=true;
+            return true;
+        }else{
+            return false;
         }
 
-        return flag;
+
+
     }
 }
 
