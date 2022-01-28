@@ -10,20 +10,21 @@ import org.testng.annotations.Test;
 
 public class VyTrackTests extends TestBase {
 
-
+    LogInPage logInPage;
+    CalendarEventsPage calendarEventsPage;
 
     @Test
     public void subtitleTest(){
-        extentLogger=report.createTest("VyTrack Homework Tests");
+        extentLogger=report.createTest("VyTrack Homework Tests- Subtitle Verification");
 
 
-        LogInPage logInPage=new LogInPage();
+       logInPage=new LogInPage();
 
         logInPage.loginAsStoreManager();
         extentLogger.info("Log in to app as a store manager ");
         extentLogger.info("Test datas: username: "+ ConfigurationReader.get("storemanager_username")+" password: "+ ConfigurationReader.get("storemanager_password"));
 
-        CalendarEventsPage calendarEventsPage=new CalendarEventsPage();
+         calendarEventsPage=new CalendarEventsPage();
 
 
         calendarEventsPage.navigateToModule("Activities","Calendar Events");
@@ -37,6 +38,32 @@ public class VyTrackTests extends TestBase {
 
 
     }
+
+    @Test
+    public void pageNumberTest(){
+        extentLogger=report.createTest("VyTrack Homework Tests- Subtitle Verification");
+
+
+        logInPage=new LogInPage();
+
+        logInPage.loginAsStoreManager();
+        extentLogger.info("Log in to app as a store manager ");
+        extentLogger.info("Test datas: username: "+ ConfigurationReader.get("storemanager_username")+" password: "+ ConfigurationReader.get("storemanager_password"));
+
+        calendarEventsPage=new CalendarEventsPage();
+
+
+        calendarEventsPage.navigateToModule("Activities","Calendar Events");
+        extentLogger.info("Navigate to Calendar Events page under Activities tab");
+
+
+        String value = calendarEventsPage.pageNumber.getAttribute("value");
+        System.out.println("value = " + value);
+        
+
+
+    }
+
 
 
 

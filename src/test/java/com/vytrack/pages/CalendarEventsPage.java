@@ -20,4 +20,7 @@ public class CalendarEventsPage extends BasePage {
     @FindBy(xpath = "//div[@class='btn-group actions-group']")
     public WebElement optionsButton;
 
+    @FindBy(css = ".icons-holder>li>input")
+    public WebElement pageNumber;
+
 }
