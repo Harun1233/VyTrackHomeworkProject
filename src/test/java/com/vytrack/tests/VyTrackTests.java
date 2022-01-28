@@ -8,6 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
+
 public class VyTrackTests extends TestBase {
 
     LogInPage logInPage;
@@ -66,11 +68,9 @@ public class VyTrackTests extends TestBase {
 
     }
 
-         @Test(dataProvider = "storeManagerData")
-        public void viewPerPageNumberTest(String username, String password){
+    @Test(dataProvider = "storeManagerData")
+    public void viewPerPageNumberTest(String username, String password){
         extentLogger=report.createTest("VyTrack Homework Tests- PerPageNumber Verification");
-
-
         logInPage=new LogInPage();
         logInPage.login(username,password);
         extentLogger.info("Log in to app as a store manager ");
@@ -92,6 +92,32 @@ public class VyTrackTests extends TestBase {
              extentLogger.pass("viewPerPageNumberTest is passed");
 
          }
+
+
+    @Test(dataProvider = "storeManagerData")
+    public void numbersOfRecordsTest(String username, String password) {
+        extentLogger = report.createTest("VyTrack Homework Tests- numbersOfRecords verification");
+        logInPage = new LogInPage();
+        logInPage.login(username, password);
+        extentLogger.info("Log in to app as a store manager ");
+        extentLogger.info("Test datas: username: " + username + " password: " + password);
+
+        calendarEventsPage = new CalendarEventsPage();
+
+
+        calendarEventsPage.navigateToModule("Activities", "Calendar Events");
+        extentLogger.info("Navigate to Calendar Events page under Activities tab");
+
+        calendarEventsPage.waitUntilLoaderScreenDisappear();
+
+        int totalRowNumber = calendarEventsPage.getTotalRowNumber();
+        int recordsNumber = calendarEventsPage.getRecordsNumber();
+
+        extentLogger.info("Verify that number of calendar events is equal to number of records");
+        Assert.assertEquals(totalRowNumber,recordsNumber,"Verify that total rows number are eqaual to records number ");
+
+        extentLogger.pass("numbersOfRecords verification test is passed");
+    }
 
 
 
