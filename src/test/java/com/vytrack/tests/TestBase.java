@@ -7,8 +7,11 @@ import com.vytrack.utilites.BrowserUtils;
 import com.vytrack.utilites.ConfigurationReader;
 import com.vytrack.utilites.Driver;
 import com.vytrack.utilites.ExcelUtil;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
 import org.testng.annotations.*;
@@ -56,7 +59,8 @@ public class TestBase {
     @DataProvider
     public Object[][] storeManagerData(){
         String worksheet=ConfigurationReader.get("excelWorkSheet");
-        ExcelUtil strMngr=new ExcelUtil("src/test/resources/Vytracktestdata.xlsx",worksheet);
+        String excelFileName=ConfigurationReader.get("excelFileName");
+        ExcelUtil strMngr=new ExcelUtil("src/test/resources/"+excelFileName,worksheet);
 
         String[][] dataArray = strMngr.getDataArray();
 
@@ -90,9 +94,11 @@ public class TestBase {
             extentLogger.fail(result.getName());
 
             //take the screenShot and return the location of screenSHot
+            Thread.sleep(5000);
             String screenShotPath= BrowserUtils.getScreenshot(result.getName());
 
             //add your SS to your report
+
             extentLogger.addScreenCaptureFromPath(screenShotPath);
 
             // capture the exception and put it inside the report

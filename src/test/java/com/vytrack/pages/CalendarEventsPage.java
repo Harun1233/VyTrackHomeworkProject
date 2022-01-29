@@ -4,11 +4,13 @@ package com.vytrack.pages;
 
 
 import com.vytrack.utilites.Driver;
+import com.vytrack.utilites.PdfUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.IOException;
 import java.util.List;
 
 public class CalendarEventsPage extends BasePage {
@@ -37,6 +39,12 @@ public class CalendarEventsPage extends BasePage {
 
     @FindBy(xpath = "//button[@class='btn btn-default btn-small dropdown-toggle']//input[@type='checkbox']")
     public WebElement titleCheckBox;
+
+    @FindBy(xpath = "//tbody//tr//td[2]")
+    public WebElement testersMeetings;
+
+    @FindBy(xpath = "(//div[@class='section-content'])[1]")
+    public WebElement meetingDetails;
 
     public int getTotalRowNumber() {
 
@@ -84,6 +92,27 @@ public class CalendarEventsPage extends BasePage {
         }else{
             return false;
         }
+
+
+
+    }
+
+    public boolean comparisonPDFTexts() throws IOException {
+
+        PdfUtil pdfUtil=new PdfUtil();
+        String pdfText = pdfUtil.getPdfText();
+
+
+        testersMeetings.click();
+        String meetingDetailsText = meetingDetails.getText();
+
+
+        if (pdfText.contains(meetingDetailsText)){
+            return true;
+        }else{
+            return false;
+        }
+
 
 
 

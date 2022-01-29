@@ -3,11 +3,14 @@ package com.vytrack.tests;
 import com.vytrack.pages.CalendarEventsPage;
 import com.vytrack.pages.LogInPage;
 import com.vytrack.utilites.ConfigurationReader;
+import com.vytrack.utilites.Driver;
 import com.vytrack.utilites.ExcelUtil;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.Arrays;
 
 public class VyTrackTests extends TestBase {
@@ -22,9 +25,7 @@ public class VyTrackTests extends TestBase {
 
         logInPage = new LogInPage();
         logInPage.login(username, password);
-        extentLogger.info("Log in to app as a store manager ");
-        extentLogger.info("Test datas: username: " + username + " password: " + password);
-
+        extentLogger.info("Log in to app as a store manager \nTest datas: username: " + username + " password: " + password);
         calendarEventsPage = new CalendarEventsPage();
 
 
@@ -46,8 +47,7 @@ public class VyTrackTests extends TestBase {
 
         logInPage = new LogInPage();
         logInPage.login(username, password);
-        extentLogger.info("Log in to app as a store manager ");
-        extentLogger.info("Test datas: username: " + username + " password: " + password);
+        extentLogger.info("Log in to app as a store manager \nTest datas: username: " + username + " password: " + password);
 
         calendarEventsPage = new CalendarEventsPage();
 
@@ -72,9 +72,7 @@ public class VyTrackTests extends TestBase {
         extentLogger = report.createTest("VyTrack Homework Tests- PerPageNumber Verification");
         logInPage = new LogInPage();
         logInPage.login(username, password);
-        extentLogger.info("Log in to app as a store manager ");
-        extentLogger.info("Test datas: username: " + username + " password: " + password);
-
+        extentLogger.info("Log in to app as a store manager \nTest datas: username: \" + username + \" password: \" + password");
         calendarEventsPage = new CalendarEventsPage();
 
 
@@ -98,9 +96,7 @@ public class VyTrackTests extends TestBase {
         extentLogger = report.createTest("VyTrack Homework Tests- numbersOfRecords verification");
         logInPage = new LogInPage();
         logInPage.login(username, password);
-        extentLogger.info("Log in to app as a store manager ");
-        extentLogger.info("Test datas: username: " + username + " password: " + password);
-
+        extentLogger.info("Log in to app as a store manager \nTest datas: username: " + username + " password: " + password);
         calendarEventsPage = new CalendarEventsPage();
 
 
@@ -125,9 +121,7 @@ public class VyTrackTests extends TestBase {
 
         logInPage = new LogInPage();
         logInPage.login(username, password);
-        extentLogger.info("Log in to app as a store manager ");
-        extentLogger.info("Test datas: username: " + username + " password: " + password);
-
+        extentLogger.info("Log in to app as a store manager \nTest datas: username: " + username + " password: " + password);
         calendarEventsPage = new CalendarEventsPage();
 
         calendarEventsPage.navigateToModule(ConfigurationReader.get("tabName"), ConfigurationReader.get("moduleName"));
@@ -144,4 +138,30 @@ public class VyTrackTests extends TestBase {
 
 
     }
-}
+
+    @Test(dataProvider = "storeManagerData")
+    public void meetingDetailsTest(String username, String password) throws IOException {
+        extentLogger = report.createTest("VyTrack Homework Tests- meetingDetailsTest");
+
+
+        logInPage = new LogInPage();
+        logInPage.login(username, password);
+        extentLogger.info("Log in to app as a store manager \nTest datas: username: " + username + " password: " + password);
+
+
+        calendarEventsPage = new CalendarEventsPage();
+
+        calendarEventsPage.navigateToModule(ConfigurationReader.get("tabName"), ConfigurationReader.get("moduleName"));
+        extentLogger.info("Navigate to Calendar Events page under Activities tab");
+        extentLogger.info("Navigate to Activites tab and Calender Events page");
+        calendarEventsPage.waitUntilLoaderScreenDisappear();
+
+        boolean b = calendarEventsPage.comparisonPDFTexts();
+
+        extentLogger.info("Verify that meeting details from page are as expected");
+        Assert.assertTrue(b,"Verify that meeting details from app are as expected");
+        extentLogger.pass("meetingDetailsTest is passed");
+    }
+
+
+    }
