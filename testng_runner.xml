@@ -4,12 +4,7 @@
 
         <classes>
             <class name="com.vytrack.tests.VyTrackTests">
-                <methods>
 
-                    <include name="viewPerPageNumberTest">
-
-                    </include>
-                </methods>
 
             </class>
         </classes>
